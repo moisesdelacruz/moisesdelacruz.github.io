@@ -21,23 +21,16 @@ $(function() {
                 firstName = name.split(' ').slice(0, -1).join(' ');
             }
             $.ajax({
-                url: "https://formspree.io/moiseslacruz16@gmail.com",
+                url: "https://formspree.io/moisesdelacruz.dev@gmail.com",
                 method: "POST",
-                headers: {
-                  Accept: "application/json; charset=utf-8",
-                  "Content-Type": "application/json; charset=utf-8"
-                },
-                data:{
-                    name:name,
-                    _replyto:email,
-                     email:email,
-                    message:message,
-                    _subject:'My Form Submission',
+                data: {
+                  name: name,
+                  phone: phone,
+                  email: email,
+                  message: message
                 },
                 dataType: "json",
-                // cache: false,
                 success: function() {
-                  debugger
                     // Enable button & show success message
                     $("#btnSubmit").attr("disabled", false);
                     $('#success').html("<div class='alert alert-success'>");
@@ -52,7 +45,6 @@ $(function() {
                     $('#contactForm').trigger("reset");
                 },
                 error: function(err) {
-                  debugger
                     // Fail message
                     $('#success').html("<div class='alert alert-danger'>");
                     $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
