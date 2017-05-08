@@ -9,7 +9,7 @@ $(function() {
             // Prevent spam click and default submit behaviour
             $("#btnSubmit").attr("disabled", true);
             event.preventDefault();
-            
+
             // get values from FORM
             var name = $("input#name").val();
             var email = $("input#email").val();
@@ -21,16 +21,23 @@ $(function() {
                 firstName = name.split(' ').slice(0, -1).join(' ');
             }
             $.ajax({
-                url: "././mail/contact_me.php",
-                type: "POST",
-                data: {
-                    name: name,
-                    phone: phone,
-                    email: email,
-                    message: message
+                url: "https://formspree.io/moiseslacruz16@gmail.com",
+                method: "POST",
+                headers: {
+                  Accept: "application/json; charset=utf-8",
+                  "Content-Type": "application/json; charset=utf-8"
                 },
-                cache: false,
+                data:{
+                    name:name,
+                    _replyto:email,
+                     email:email,
+                    message:message,
+                    _subject:'My Form Submission',
+                },
+                dataType: "json",
+                // cache: false,
                 success: function() {
+                  debugger
                     // Enable button & show success message
                     $("#btnSubmit").attr("disabled", false);
                     $('#success').html("<div class='alert alert-success'>");
@@ -44,7 +51,8 @@ $(function() {
                     //clear all fields
                     $('#contactForm').trigger("reset");
                 },
-                error: function() {
+                error: function(err) {
+                  debugger
                     // Fail message
                     $('#success').html("<div class='alert alert-danger'>");
                     $('#success > .alert-danger').html("<button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;")
